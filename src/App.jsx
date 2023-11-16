@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import "./App.css";
 
 // new Date().toLocaleString('en-us', { timeStyle:'full', dateStyle:'full'})
 
 function App() {
-  const [Time, setTime] = useState([]);
+  const [Time, setTime] = useState(
+    new Date()
+      .toLocaleString("en-us", {
+        timeStyle: "full",
+        dateStyle: "full",
+      })
+      .split(" ")
+  );
   const FullDay = Time[0];
   const Month = Time[1];
   const Day = Time[2];
@@ -14,7 +21,7 @@ function App() {
   const Min = Numbers[1];
   const Sec = Numbers[2];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const myInterval = setInterval(() => {
       setTime(
         new Date()
@@ -29,10 +36,6 @@ function App() {
       clearInterval(myInterval);
     };
   }, []);
-
-  useEffect(() => {
-    // console.log(FullDay, Month, Day, Year, Hour, Min, Sec);
-  }, [Time]);
 
   return (
     <>
